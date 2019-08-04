@@ -19,84 +19,6 @@ var select_filiere = document.getElementById('select_filiere'),
   input_mensualite = document.getElementById('mensualite'),
   input_total = document.getElementById('total');
 
-// on ecoute le changement de type d'action (nouveau ou ancien)
-var prev = null;
-for (var i = 0; i < typeActionRadio.length; i++) {
-  typeActionRadio[i].addEventListener('change', function() {
-    if (this !== prev) {
-      prev = this;
-    }
-    // si l'option ancien est choisi on disable le formulaire
-    if (this.value == 'ancien') {
-      actionAncienFormulaire();
-    } else {
-      actionNouveauFormulaire();
-    }
-
-    // desactivation du formulaire
-    function actionAncienFormulaire() {
-      input_prenom.setAttribute('disabled', 'disabled');
-      input_nom.setAttribute('disabled', 'disabled');
-      select_sexe.setAttribute('disabled', 'disabled');
-      input_datenaissance.setAttribute('disabled', 'disabled');
-      input_lieunaissance.setAttribute('disabled', 'disabled');
-      input_email.setAttribute('disabled', 'disabled');
-      input_telephone.setAttribute('disabled', 'disabled');
-      input_adresse.setAttribute('disabled', 'disabled');
-      input_matricule.removeAttribute('disabled');
-      // disable form inscription
-      select_filiere.setAttribute('disabled', 'disabled');
-      select_classe.setAttribute('disabled', 'disabled');
-      input_dateinscription.setAttribute('disabled', 'disabled');
-      input_anneeacademique.setAttribute('disabled', 'disabled');
-      submitButton.setAttribute('disabled', 'disabled');
-      cleanFormulaire();
-    }
-
-    // activation du formulaire
-    function actionNouveauFormulaire() {
-      input_prenom.removeAttribute('disabled');
-      input_nom.removeAttribute('disabled');
-      select_sexe.removeAttribute('disabled');
-      input_datenaissance.removeAttribute('disabled');
-      input_lieunaissance.removeAttribute('disabled');
-      input_email.removeAttribute('disabled');
-      input_telephone.removeAttribute('disabled');
-      input_adresse.removeAttribute('disabled');
-      input_matricule.setAttribute('disabled', 'disabled');
-      // disable form inscription
-      select_filiere.removeAttribute('disabled');
-      select_classe.removeAttribute('disabled');
-      input_dateinscription.removeAttribute('disabled');
-      input_anneeacademique.removeAttribute('disabled');
-      submitButton.removeAttribute('disabled');
-      cleanFormulaire();
-      input_matricule.value = randomUniqueMatricule();
-    }
-
-    // efface donnees du formulaire
-    function cleanFormulaire() {
-      input_matricule.value = '';
-      input_prenom.value = '';
-      input_nom.value = '';
-      select_sexe.value = '';
-      input_datenaissance.value = '';
-      input_lieunaissance.value = '';
-      input_email.value = '';
-      input_telephone.value = '';
-      input_adresse.value = '';
-
-      select_filiere.value = '';
-      select_classe.value = '';
-      input_montantinscription.value = '';
-      input_mensualite.value = '';
-      input_total.value = '';
-      input_dateinscription.value = '';
-      input_anneeacademique.value = '';
-    }
-  });
-}
-
 $(document).ready(function() {
   initialisation();
 });
@@ -234,6 +156,101 @@ function events() {
       });
     }
   });
+}
 
-  // recherche etudiant
+// on ecoute le changement de type d'action (nouveau ou ancien)
+var prev = null;
+for (var i = 0; i < typeActionRadio.length; i++) {
+  typeActionRadio[i].addEventListener('change', function() {
+    if (this !== prev) {
+      prev = this;
+    }
+    // si l'option ancien est choisi on disable le formulaire
+    if (this.value == 'ancien') {
+      actionAncienFormulaire();
+    } else {
+      actionNouveauFormulaire();
+    }
+
+    // desactivation du formulaire
+    function actionAncienFormulaire() {
+      input_prenom.setAttribute('disabled', 'disabled');
+      input_nom.setAttribute('disabled', 'disabled');
+      select_sexe.setAttribute('disabled', 'disabled');
+      input_datenaissance.setAttribute('disabled', 'disabled');
+      input_lieunaissance.setAttribute('disabled', 'disabled');
+      input_email.setAttribute('disabled', 'disabled');
+      input_telephone.setAttribute('disabled', 'disabled');
+      input_adresse.setAttribute('disabled', 'disabled');
+      input_matricule.removeAttribute('disabled');
+      // disable form inscription
+      select_filiere.setAttribute('disabled', 'disabled');
+      select_classe.setAttribute('disabled', 'disabled');
+      input_dateinscription.setAttribute('disabled', 'disabled');
+      input_anneeacademique.setAttribute('disabled', 'disabled');
+      submitButton.setAttribute('disabled', 'disabled');
+      cleanFormulaire();
+    }
+
+    // activation du formulaire
+    function actionNouveauFormulaire() {
+      input_prenom.removeAttribute('disabled');
+      input_nom.removeAttribute('disabled');
+      select_sexe.removeAttribute('disabled');
+      input_datenaissance.removeAttribute('disabled');
+      input_lieunaissance.removeAttribute('disabled');
+      input_email.removeAttribute('disabled');
+      input_telephone.removeAttribute('disabled');
+      input_adresse.removeAttribute('disabled');
+      input_matricule.setAttribute('disabled', 'disabled');
+      // disable form inscription
+      select_filiere.removeAttribute('disabled');
+      select_classe.removeAttribute('disabled');
+      input_dateinscription.removeAttribute('disabled');
+      input_anneeacademique.removeAttribute('disabled');
+      submitButton.removeAttribute('disabled');
+      cleanFormulaire();
+      input_matricule.value = randomUniqueMatricule();
+    }
+
+    // efface donnees du formulaire
+    function cleanFormulaire() {
+      input_matricule.value = '';
+      input_prenom.value = '';
+      input_nom.value = '';
+      select_sexe.value = '';
+      input_datenaissance.value = '';
+      input_lieunaissance.value = '';
+      input_email.value = '';
+      input_telephone.value = '';
+      input_adresse.value = '';
+
+      select_filiere.value = '';
+      select_classe.value = '';
+      input_montantinscription.value = '';
+      input_mensualite.value = '';
+      input_total.value = '';
+      input_dateinscription.value = '';
+      input_anneeacademique.value = '';
+    }
+  });
+}
+
+// recherche etudiant
+function rechercheEtudiant() {
+  var matricule = input_matricule.value;
+  if (matricule) {
+    $.get('http://localhost:5000/etudiants/' + matricule, function(data) {
+      var etudiant = data.etudiant;
+      // affichage des informations de l'etudiant
+      input_prenom.value = etudiant.prenom;
+      input_nom.value = etudiant.nom;
+      select_sexe.value = etudiant.sexe;
+      input_datenaissance.value = etudiant.datenaissance;
+      input_lieunaissance.value = etudiant.lieunaissance;
+      input_email.value = etudiant.email;
+      input_telephone.value = etudiant.telephone;
+      input_adresse.value = etudiant.adresse;
+    });
+  }
 }

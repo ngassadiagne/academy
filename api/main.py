@@ -208,13 +208,13 @@ def addNewInscription():
   db.session().commit()
   return jsonify({"data": inscription_schema.dump(inscription).data})
 
-@app.route('/etudiants/:matricule')
+@app.route('/etudiants/<matricule>')
 def getEtudiant(matricule):
   etudiant = Etudiant.query \
     .filter(Etudiant.matricule == matricule) \
     .one_or_none()
   etudiant_schema = EtudiantSchema()
-  return jsonify({'inscriptions': etudiant_schema.dump(etudiant).data})
+  return jsonify({'etudiant': etudiant_schema.dump(etudiant).data})
 
 #***********************************************************************************************
 if __name__ == '__main__': #si le fichier est executer alors execute le bloc
