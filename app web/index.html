@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <title>Academy</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Row sélection type etudiant -->
+      <div class="row">
+        <div class="col-md-12">
+          <label class="radio-input"
+            ><input type="radio" name="typeEtudiant" checked />Nouveau</label
+          >
+
+          <label class="radio-input"
+            ><input type="radio" name="typeEtudiant" />Ancien</label
+          >
+        </div>
+      </div>
+      <!-- Row information etudiant -->
+      <div class="card etudiant-content">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="title">Etudiant</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="matricule"
+                  >Matricule <span class="required">*</span></label
+                >
+                <input
+                  required
+                  type="text"
+                  class="form-control"
+                  id="matricule"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="prenom"
+                  >Prénom <span class="required">*</span></label
+                >
+                <input required type="text" class="form-control" id="prenom" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="nom">Nom <span class="required">*</span></label>
+                <input required type="text" class="form-control" id="nom" />
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="sexer">Sexe <span class="required">*</span></label>
+                <select required class="custom-select" name="sexe" id="sexe">
+                  <option selected>Selectionnez le sexe</option>
+                  <option value="Femme">Femme</option>
+                  <option value="Homme">Homme</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateNaissance"
+                  >Date de naissance <span class="required">*</span></label
+                >
+                <input
+                  required
+                  id="dateNaissance"
+                  class="form-control"
+                  type="date"
+                  name="dateNaissance"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lieuNaissance"
+                  >Lieu de naissance <span class="required">*</span></label
+                >
+                <input
+                  required
+                  type="text"
+                  name="lieuNaissance"
+                  id="lieuNaissance"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email"
+                  >E-mail <span class="required">*</span></label
+                >
+                <input
+                  required
+                  placeholder="Ex: xxx@xyz.xyz"
+                  id="email"
+                  class="form-control"
+                  type="email"
+                  name="email"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="telephone"
+                  >Téléphone <span class="required">*</span></label
+                >
+                <input
+                  id="telephone"
+                  class="form-control"
+                  type="text"
+                  placeholder="Ex: xx xxx xx xx"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="adresse"
+                  >Adresse <span class="required">*</span></label
+                >
+                <textarea
+                  name="adresse"
+                  class="form-control"
+                  id="adresse"
+                  cols="20"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row information inscription -->
+      <div class="card inscription-content">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="title">Inscription</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="select_filiere"
+                  >Filière <span class="required">*</span></label
+                >
+                <select
+                  required
+                  id="select_filiere"
+                  class="custom-select"
+                  name=""
+                >
+                  <option value="">Choisir une filière</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="select_classe"
+                  >Classe <span class="required">*</span></label
+                >
+                <select
+                  required
+                  id="select_classe"
+                  class="custom-select"
+                  name=""
+                >
+                  <option value="">Choisir une classe</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="montant"
+                  >Montant de l'inscription
+                  <span class="required">*</span></label
+                >
+                <input
+                  id="montant"
+                  required
+                  class="form-control"
+                  type="text"
+                  name=""
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="mensualite"
+                  >Mensualité de l'inscription
+                  <span class="required">*</span></label
+                >
+                <input
+                  id="mensualite"
+                  class="form-control"
+                  type="text"
+                  name=""
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="total">Total <span class="required">*</span></label>
+                <input
+                  required
+                  id="total"
+                  class="form-control"
+                  type="text"
+                  name=""
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateinscription"
+                  >Date de l'inscription <span class="required">*</span></label
+                >
+                <input
+                  required
+                  id="dateInscription"
+                  class="form-control"
+                  type="date"
+                  name=""
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="anneeacademique"
+                  >Année académique <span class="required">*</span></label
+                >
+                <input
+                  id="anneeAcademic"
+                  class="form-control"
+                  required
+                  type="text"
+                  name=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-success">Enregister</button>
+        </div>
+      </div>
+
+      <div class="gap"></div>
+    </div>
+    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
