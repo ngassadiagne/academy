@@ -29,9 +29,11 @@ for (var i = 0; i < typeActionRadio.length; i++) {
     // si l'option ancien est choisi on disable le formulaire
     if (this.value == 'ancien') {
       actionAncienFormulaire();
+    } else {
+      actionNouveauFormulaire();
     }
 
-    // disable du formulaire
+    // desactivation du formulaire
     function actionAncienFormulaire() {
       input_prenom.setAttribute('disabled', 'disabled');
       input_nom.setAttribute('disabled', 'disabled');
@@ -41,19 +43,57 @@ for (var i = 0; i < typeActionRadio.length; i++) {
       input_email.setAttribute('disabled', 'disabled');
       input_telephone.setAttribute('disabled', 'disabled');
       input_adresse.setAttribute('disabled', 'disabled');
-      input_matricule.value = '';
       input_matricule.removeAttribute('disabled');
       // disable form inscription
       select_filiere.setAttribute('disabled', 'disabled');
       select_classe.setAttribute('disabled', 'disabled');
-      input_montantinscription.setAttribute('disabled', 'disabled');
-      input_mensualite.setAttribute('disabled', 'disabled');
-      input_total.setAttribute('disabled', 'disabled');
       input_dateinscription.setAttribute('disabled', 'disabled');
       input_anneeacademique.setAttribute('disabled', 'disabled');
+      submitButton.setAttribute('disabled', 'disabled');
+      cleanFormulaire();
     }
 
-    function actionNouveauFormulaire() {}
+    // activation du formulaire
+    function actionNouveauFormulaire() {
+      input_prenom.removeAttribute('disabled');
+      input_nom.removeAttribute('disabled');
+      select_sexe.removeAttribute('disabled');
+      input_datenaissance.removeAttribute('disabled');
+      input_lieunaissance.removeAttribute('disabled');
+      input_email.removeAttribute('disabled');
+      input_telephone.removeAttribute('disabled');
+      input_adresse.removeAttribute('disabled');
+      input_matricule.setAttribute('disabled', 'disabled');
+      // disable form inscription
+      select_filiere.removeAttribute('disabled');
+      select_classe.removeAttribute('disabled');
+      input_dateinscription.removeAttribute('disabled');
+      input_anneeacademique.removeAttribute('disabled');
+      submitButton.removeAttribute('disabled');
+      cleanFormulaire();
+      input_matricule.value = randomUniqueMatricule();
+    }
+
+    // efface donnees du formulaire
+    function cleanFormulaire() {
+      input_matricule.value = '';
+      input_prenom.value = '';
+      input_nom.value = '';
+      select_sexe.value = '';
+      input_datenaissance.value = '';
+      input_lieunaissance.value = '';
+      input_email.value = '';
+      input_telephone.value = '';
+      input_adresse.value = '';
+
+      select_filiere.value = '';
+      select_classe.value = '';
+      input_montantinscription.value = '';
+      input_mensualite.value = '';
+      input_total.value = '';
+      input_dateinscription.value = '';
+      input_anneeacademique.value = '';
+    }
   });
 }
 
@@ -154,6 +194,46 @@ function events() {
       anneeacademique = input_anneeacademique.value,
       dateinscription = input_dateinscription.value;
 
-    console.log('ajout');
+    if (
+      prenom &&
+      nom &&
+      matricule &&
+      sexe &&
+      datenaissance &&
+      lieunaissance &&
+      email &&
+      telephone &&
+      adresse &&
+      classe &&
+      anneeacademique &&
+      dateinscription
+    ) {
+      var body = {
+        matricule: matricule,
+        prenom: prenom,
+        nom: nom,
+        datenaissance: datenaissance,
+        lieunaissance: lieunaissance,
+        email: email,
+        telephone: telephone,
+        adresse: adresse,
+        classe: classe,
+        anneeacademique: anneeacademique,
+        dateinscription: dateinscription,
+        sexe: sexe
+      };
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:5000/inscriptions',
+        data: JSON.stringify(body),
+        contentType: 'application/json',
+        dateType: 'json',
+        success: function() {
+          window.location.reload();
+        }
+      });
+    }
   });
+
+  // recherche etudiant
 }
